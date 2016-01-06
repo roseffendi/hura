@@ -1,0 +1,2 @@
+# hura
+Meteorjs crudss experiment
