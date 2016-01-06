@@ -1,0 +1,52 @@
+<template name="Home">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="search">Search</label>
+                        <input type="email" class="form-control" id="search" placeholder="search">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="sort">Sort</label>
+                        <select class="form-control" name="sorting" id="sorting">
+                            <option value="desc">Newest</option>
+                            <option value="asc">Oldest</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="pull-right">
+                <a href="{{pathFor route='course.create'}}" class="btn btn-primary">Create</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list">
+                <!-- {{#if equals coursesCount 0}}
+                    No Data
+                {{else}}
+                    {{#each courses}}
+                        <li>{{name}}</li>
+                    {{/each}}
+                {{/if}} -->
+
+                {{#if Template.subscriptionsReady}}
+                    {{#each courses}}
+                        <li>
+                            <a href={{pathFor route='course.detail' _id=this._id }}> {{name}} </a>
+                            <button class="btn btn-danger remove pull-right"> Remove </button> <a class="btn btn-default pull-right" href={{pathFor route='course.update' _id=this._id }}> Update </a>
+                            <div class="clearfix"></div>
+                        </li>
+                    {{/each}}
+                    {{#if hasMoreCourses}}
+                        <a class="load-more" href="#">Load More</a>
+                    {{/if}}
+                {{else}}
+                    <div class="loading">{{>spinner}}</div>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</template>
